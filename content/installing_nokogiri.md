@@ -187,8 +187,26 @@ subdirectory thereof named `libxml2`.
 
 ## Windows
 
-Luckily for you, building on Windows is so difficult that we've done
-it for you: Nokogiri comes bundled with all the DLLs you need to be
-NOKOGIRIFIED!
+Luckily for you Nokogiri comes bundled with all the DLLs you need to be
+NOKOGIRIFIED using the [RubyInstaller][]!
+
+  [RubyInstaller]: http://rubyinstaller.org/
 
     gem install nokogiri
+
+Alternatively you can install the source gem, provided that you've got the
+DevKit installed. This will download the needed libraries (zlib and
+libiconv) as source tar files and will use them together with the bundled
+libxml2 and libxslt versions for the build process.
+
+    gem install nokogiri --platform=ruby
+
+Installation from git is somewhat different compared to other platforms:
+
+    git clone -n https://github.com/sparklemotion/nokogiri.git
+    cd nokogiri
+    git config core.autocrlf false
+    git checkout master -f
+    bundle install
+    rake -rdevkit native gem
+    gem install pkg\nokogiri-<VERSION>-x64-mingw32.gem
