@@ -59,6 +59,27 @@ And if you have problems, try:
 
     sudo port upgrade outdated
 
+### homebrew 0.9.5
+
+Install homebrew.
+
+    brew doctor
+
+Fix anything mentioned in the `brew doctor` output.
+
+Install ruby using homebrew.
+
+    brew install ruby
+    echo 'export PATH=/usr/local/opt/ruby/bin:$PATH' >> ~/.bash_profile
+
+`source ~/.bash_profile` should reuslt in an updated path, but the brew installed `ruby` isn't found. The solution is to open a new terminal session.
+
+Install nokogiri
+
+    gem install nokogiri
+
+This is known to work on OSX Mavericks OS X 10.9.2 (13C1021).
+
 ### homebrew 0.9
 
 Apparently some people have had problems getting libiconv to install
