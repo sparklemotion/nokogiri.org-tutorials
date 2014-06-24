@@ -68,25 +68,21 @@ Here's what reportedly works:
     brew install libxml2 libxslt
     brew link libxml2 libxslt
     
-Then install libiconv from source:
+Then install libiconv from `homebrew/dupes`:
 
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
-    tar xvfz libiconv-1.13.1.tar.gz
-    cd libiconv-1.13.1
-    ./configure --prefix=/usr/local/Cellar/libiconv/1.13.1
-    make
-    sudo make install
+    brew tap homebrew/dupes
+    brew install libiconv
 
 If using Mountain Lion with Homebrew 0.9, it's been [reported](https://github.com/sparklemotion/nokogiri/issues/442#issuecomment-7978408) that you may also need to use gcc 4.2:
     sudo ln -s /usr/bin/gcc /usr/bin/gcc-4.2
     
 Then (finally) install nokogiri:
 
-    gem install nokogiri -- --with-xml2-include=/usr/local/Cellar/libxml2/2.7.8/include/libxml2 \
-                            --with-xml2-lib=/usr/local/Cellar/libxml2/2.7.8/lib \
-                            --with-xslt-dir=/usr/local/Cellar/libxslt/1.1.26 \
-                            --with-iconv-include=/usr/local/Cellar/libiconv/1.13.1/include \
-                            --with-iconv-lib=/usr/local/Cellar/libiconv/1.13.1/lib
+    gem install nokogiri -- --with-xml2-include=/usr/local/opt/libxml2/include/libxml2 \
+                            --with-xml2-lib=/usr/local/opt/libxml2/lib \
+                            --with-xslt-dir=/usr/local/opt/libxslt/ \
+                            --with-iconv-include=/usr/local/opt/libiconv/include \
+                            --with-iconv-lib=/usr/local/opt/libiconv/lib
 
 Well played, homebrew. That certainly was "the easiest and most
 flexible way to install the UNIX tools Apple didn't include with OS
