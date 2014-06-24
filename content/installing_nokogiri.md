@@ -80,6 +80,10 @@ Then install libiconv from source:
 If using Mountain Lion with Homebrew 0.9, it's been [reported](https://github.com/sparklemotion/nokogiri/issues/442#issuecomment-7978408) that you may also need to use gcc 4.2:
     sudo ln -s /usr/bin/gcc /usr/bin/gcc-4.2
     
+You will also need to install XCode via the Apple App Store (in addition to the XCode Command Line Tools,) then run:
+    
+    xcodebuild -license
+    
 Then (finally) install nokogiri:
 
     gem install nokogiri -- --with-xml2-include=/usr/local/Cellar/libxml2/2.7.8/include/libxml2 \
