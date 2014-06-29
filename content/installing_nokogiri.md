@@ -65,8 +65,8 @@ Apparently some people have had problems getting libiconv to install
 under homebrew 0.9 (see [issue #442](https://github.com/sparklemotion/nokogiri/issues/442)).
 Here's what reportedly works:
 
-    brew install libxml2 libxslt
-    brew link libxml2 libxslt
+    brew install libxml2 libxslt wget
+    brew link libxml2 libxslt wget
     
 Then install libiconv from source:
 
