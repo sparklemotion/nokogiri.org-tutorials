@@ -61,36 +61,35 @@ And if you have problems, try:
 
 ### homebrew 0.9
 
-Apparently some people have had problems getting libiconv to install
-under homebrew 0.9 (see [issue #442](https://github.com/sparklemotion/nokogiri/issues/442)).
-Here's what reportedly works:
+Mac users should first install or reinstall the latest Xcode.  Then install or reinstall the
+latest ["Command Line Tools for Xcode"](https://developer.apple.com/downloads/).  You may have
+broken header files in your Xcode installation that this will clear up (which may be caused by OSX
+upgrades to new major versions, or by incomplete Time Machine restores).
 
-    brew install libxml2 libxslt
-    brew link libxml2 libxslt
-    
-Then install libiconv from source:
+Then ensure that you are picking up the correct Xcode (which is 5.1.1 at the time of this
+writing).  This command may need to change if or when Apple releases an Xcode 6.x if they move the
+location and is not backwards compatible or tested with Xcode versions earlier than 5.1.1:
 
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
-    tar xvfz libiconv-1.13.1.tar.gz
-    cd libiconv-1.13.1
-    ./configure --prefix=/usr/local/Cellar/libiconv/1.13.1
-    make
-    sudo make install
+```
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
 
-If using Mountain Lion with Homebrew 0.9, it's been [reported](https://github.com/sparklemotion/nokogiri/issues/442#issuecomment-7978408) that you may also need to use gcc 4.2:
-    sudo ln -s /usr/bin/gcc /usr/bin/gcc-4.2
-    
-Then (finally) install nokogiri:
+Then reinstall libiconv in homebrew using the dupes keg (again Time Machine restores and OSX upgrades
+seem to reliably break homebrew and require reinstalling all of the homebrew packages):
 
-    gem install nokogiri -- --with-xml2-include=/usr/local/Cellar/libxml2/2.7.8/include/libxml2 \
-                            --with-xml2-lib=/usr/local/Cellar/libxml2/2.7.8/lib \
-                            --with-xslt-dir=/usr/local/Cellar/libxslt/1.1.26 \
-                            --with-iconv-include=/usr/local/Cellar/libiconv/1.13.1/include \
-                            --with-iconv-lib=/usr/local/Cellar/libiconv/1.13.1/lib
+```
+brew tap homebrew/dupes
+brew uninstall libiconv
+brew install libiconv
+```
 
-Well played, homebrew. That certainly was "the easiest and most
-flexible way to install the UNIX tools Apple didn't include with OS
-X." </sarcasm>
+Then you can install nokogiri using the homebrew libiconv to build nokogiri's libxml and libxslt against:
+
+```
+gem install nokogiri -- --with-iconv-dir=/usr/local/opt/libiconv
+```
+
+See [issue #442](https://github.com/sparklemotion/nokogiri/issues/442) for more details.
 
 
 ### homebrew 0.8
