@@ -18,17 +18,16 @@ required for building gems with C extensions. Here are the commands to
 install everything you might need:
 
     # ruby developer packages
-    sudo apt-get install ruby1.8-dev ruby1.8 ri1.8 rdoc1.8 irb1.8
-    sudo apt-get install libreadline-ruby1.8 libruby1.8 libopenssl-ruby
+    sudo apt-get install ruby2.0-dev ruby2.0
 
-    # nokogiri requirements
-    sudo apt-get install libxslt-dev libxml2-dev
+If you're using Raring (13.04) or earlier, you can only install
+Ruby-1.9.3:
+
+    sudo apt-get install ruby1.9.1-full
+
+Then do:
+
     sudo gem install nokogiri
-
-Although, if you're using Hardy (8.04) or earlier, you'll need to install slightly different packages:
-
-    # nokogiri requirements for Hardy (8.04) and earlier
-    sudo apt-get install libxslt1-dev libxml2-dev
 
 As [John Barnette once said][package-management], "Isn't package management convenient? :)"
 
@@ -159,8 +158,26 @@ subdirectory thereof named `libxml2`.
 
 ## Windows
 
-Luckily for you, building on Windows is so difficult that we've done
-it for you: Nokogiri comes bundled with all the DLLs you need to be
-NOKOGIRIFIED!
+Luckily for you Nokogiri comes bundled with all the DLLs you need to be
+NOKOGIRIFIED using the [RubyInstaller][]!
+
+  [RubyInstaller]: http://rubyinstaller.org/
 
     gem install nokogiri
+
+Alternatively you can install the source gem, provided that you've got the
+DevKit installed. This will download the needed libraries (zlib and
+libiconv) as source tar files and will use them together with the bundled
+libxml2 and libxslt versions for the build process.
+
+    gem install nokogiri --platform=ruby
+
+Installation from git is somewhat different compared to other platforms:
+
+    git clone -n https://github.com/sparklemotion/nokogiri.git
+    cd nokogiri
+    git config core.autocrlf false
+    git checkout master -f
+    bundle install
+    rake -rdevkit native gem
+    gem install pkg\nokogiri-<VERSION>-x64-mingw32.gem
