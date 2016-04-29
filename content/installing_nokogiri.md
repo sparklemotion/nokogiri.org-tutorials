@@ -258,6 +258,25 @@ gem update --system
 
 Ya, really. >_< (Thanks to @zenspider for looking into this one.)
 
+#### "libxml2 is missing."
+If you have problems mentioning libxml2 missing that looks something like this:
+
+    checking for main() in -llzma... yes
+    checking for xmlParseDoc() in libxml/parser.h... no
+    checking for xmlParseDoc() in -lxml2... no
+    checking for xmlParseDoc() in -llibxml2... no
+    -----
+    libxml2 is missing.  Please locate mkmf.log to investigate how it is failing.
+    -----
+    *** extconf.rb failed ***
+
+Then you are probably missing the libxml2. This is a really easy fix:
+
+```sh
+gem uninstall nokogiri # if previously installed, uninstall the gem
+brew install libxml2 libxslt homebrew/dupes/libiconv # use Homebrew to install libxml2, libxslt and libiconv
+NOKOGIRI_USE_SYSTEM_LIBRARIES=1 gem install nokogiri --  --use-system-libraries --with-xml2-include="/usr/local/opt/libxml2/include/libxml2"
+```
 
 #### "I see error messages about libiconv."
 
