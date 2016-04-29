@@ -260,6 +260,7 @@ Ya, really. >_< (Thanks to @zenspider for looking into this one.)
 
 #### "libxml2 is missing."
 If you have problems mentioning libxml2 missing that looks something like this:
+
     checking for main() in -llzma... yes
     checking for xmlParseDoc() in libxml/parser.h... no
     checking for xmlParseDoc() in -lxml2... no
