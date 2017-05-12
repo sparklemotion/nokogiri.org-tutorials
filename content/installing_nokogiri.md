@@ -4,12 +4,9 @@ Because Nokogiri needs to be [compiled][] and [dynamically linked][]
 against both [libxml2][] and [libxslt][], it has gained a
 reputation for being complicated to install.
 
-As of Nokogiri 1.6, `libxml2` and `libxslt` source code is bundled
-with Nokogiri, and compiled at gem-install-time. The instructions in
-this document should work for all versions 1.6.4 and later.
-
-(If you need support for installing earlier versions of Nokogiri, you
-may want to take a look at the git history for [this document][].)
+This document fully explains how to install Nokogiri versions 1.6.4 or
+later. For earlier versions of Nokogiri, see the git history for
+[this document][].)
 
 Let's tackle each platform and scenario in ascending order of difficulty ...
 
@@ -415,25 +412,6 @@ Or, if you're using Bundler:
 
 ```sh
 bundle config build.nokogiri --use-system-libraries
-bundle install
-```
-
-
-### Using Your System Libraries with Nokogiri >= 1.6.0, < 1.6.2
-
-Nokogiri did not support the CLI argument `--use-system-libraries`
-before v1.6.2. If you are trying to use system libraries with an
-earlier version of Nokogiri, use the `NOKOGIRI_USE_SYSTEM_LIBRARIES`
-environment variable instead:
-
-```sh
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 gem install nokogiri
-```
-
-Or, if you're using Bundler:
-
-```sh
-export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 bundle install
 ```
 
