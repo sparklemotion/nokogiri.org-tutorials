@@ -396,6 +396,7 @@ On Debian/Ubuntu:
 
 ```
 sudo apt-get install pkg-config
+sudo apt-get install libxml2 libxslt-dev
 ```
 
 On FreeBSD:
